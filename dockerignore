@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+.env
+*.db
+.ipynb_checkpoints/
+data/raw/
+data/processed/
+notebooks/
+models/
+*.h5
+*.pkl
+.DS_Store
+.vscode/
+*.log

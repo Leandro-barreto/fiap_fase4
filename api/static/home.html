@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Preditor de Ações com LSTM</title>
+  <script>
+    async function prever() {
+      const ticker = document.getElementById("ticker").value;
+      const data = document.getElementById("data").value;
+      const resultado = document.getElementById("resultado");
+      const botao = document.getElementById("botao");
+
+      resultado.innerText = "Processando...";
+      botao.disabled = true;
+
+      const resposta = await fetch("/api/predict", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ ticker: ticker, target_date: data })
+      });
+
+      const json = await resposta.json();
+      resultado.innerText = `Previsão para ${json.prediction_date} | Ticker ${json.ticker}: $${json.predicted_close.toFixed(2)}`;
+      botao.disabled = false;
+    }
+  </script>
+</head>
+<body>
+  <h1>Previsão de Preço de Ações com LSTM</h1>
+  <label for="ticker">Escolha a ação:</label>
+  <select id="ticker">
+    <option value="AAPL">Apple (AAPL)</option>
+    <option value="GOOGL">Google (GOOGL)</option>
+    <option value="MSFT">Microsoft (MSFT)</option>
+    <option value="AMZN">Amazon (AMZN)</option>
+    <option value="META">Meta (META)</option>
+  </select>
+  <br><br>
+
+  <label for="data">Data desejada:</label>
+  <input type="date" id="data">
+  <br><br>
+
+  <button onclick="prever()" id="botao">Enviar</button>
+  <p id="resultado"></p>
+</body>
+</html>

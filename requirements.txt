@@ -1,0 +1,10 @@
+yfinance
+pandas
+numpy
+prometheus-fastapi-instrumentator
+scikit-learn
+matplotlib
+tensorflow
+fastapi
+uvicorn
+jinja2
