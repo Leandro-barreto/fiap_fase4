@@ -1,4 +1,4 @@
-app = "sua-api-lstm"
+app = "fiap-fase4"
 
 [build]
   dockerfile = "Dockerfile"
