@@ -9,9 +9,7 @@ __pycache__/
 data/raw/
 data/processed/
 notebooks/
-models/
-*.h5
-*.pkl
+src/
 .DS_Store
 .vscode/
 *.log

@@ -13,22 +13,61 @@
       resultado.innerText = "Processando...";
       botao.disabled = true;
 
-      const resposta = await fetch("/api/predict", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ ticker: ticker, target_date: data })
-      });
+      try {
+        const resposta = await fetch("/api/predict", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ ticker: ticker, target_date: data })
+        });
 
-      const json = await resposta.json();
-      resultado.innerText = `Previsão para ${json.prediction_date} | Ticker ${json.ticker}: $${json.predicted_close.toFixed(2)}`;
-      botao.disabled = false;
+        if (!resposta.ok) {
+          const erro = await resposta.json();
+          throw new Error(erro.detail || "Erro na predição.");
+        }
+
+        const json = await resposta.json();
+        resultado.innerText = `Previsão para ${json.prediction_date} | Ticker ${json.ticker}: $${json.predicted_close.toFixed(2)}`;
+      } catch (err) {
+        resultado.innerText = `Erro: ${err.message}`;
+      } finally {
+        botao.disabled = false;
+      }
+    }
+
+    async function enviarCSV() {
+      const fileInput = document.getElementById("csvfile");
+      const file = fileInput.files[0];
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const resultado = document.getElementById("resultado");
+      resultado.innerText = "Processando arquivo...";
+
+      try {
+        const response = await fetch("/api/predict/from_csv", {
+          method: "POST",
+          body: formData
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.detail || "Erro ao processar o arquivo.");
+        }
+
+        const json = await response.json();
+        resultado.innerText = `Previsão para ${json.prediction_date} | Ticker ${json.ticker}: $${json.predicted_close.toFixed(2)}`;
+      } catch (err) {
+        resultado.innerText = `Erro: ${err.message}`;
+      }
     }
   </script>
 </head>
 <body>
   <h1>Previsão de Preço de Ações com LSTM</h1>
+
+  <h3>Prever com ticker e data:</h3>
   <label for="ticker">Escolha a ação:</label>
   <select id="ticker">
     <option value="AAPL">Apple (AAPL)</option>
@@ -44,6 +83,17 @@
   <br><br>
 
   <button onclick="prever()" id="botao">Enviar</button>
+
+  <hr>
+
+  <h3>Ou envie um arquivo CSV:</h3>
+  <input type="file" id="csvfile" accept=".csv">
+  <br><br>
+  <button onclick="enviarCSV()">Enviar CSV</button>
+ 
+  <br><br>
+  <hr>
+  <h3>Resultado do Modelo:</h3>
   <p id="resultado"></p>
 </body>
 </html>
