@@ -1,0 +1,206 @@
+{
+  "id": null,
+  "uid": null,
+  "title": "LSTM API Monitoramento",
+  "timezone": "browser",
+  "schemaVersion": 16,
+  "version": 1,
+  "refresh": "10s",
+  "panels": [
+    {
+      "type": "graph",
+      "title": "\u23f1\ufe0f Tempo m\u00e9dio de resposta",
+      "datasource": "prometheus",
+      "id": 1,
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "rate(http_request_duration_seconds_sum[1m]) / rate(http_request_duration_seconds_count[1m])",
+          "interval": "",
+          "legendFormat": "{{handler}}",
+          "refId": "A"
+        }
+      ],
+      "lines": true,
+      "linewidth": 2,
+      "yaxes": [
+        {
+          "format": "s",
+          "label": null,
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "format": "s",
+          "label": null,
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "xaxis": {
+        "show": true
+      }
+    },
+    {
+      "type": "graph",
+      "title": "\ud83d\udcc8 Taxa de requisi\u00e7\u00f5es por segundo",
+      "datasource": "prometheus",
+      "id": 2,
+      "gridPos": {
+        "x": 12,
+        "y": 0,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "rate(http_requests_total[1m])",
+          "interval": "",
+          "legendFormat": "{{handler}}",
+          "refId": "A"
+        }
+      ],
+      "lines": true,
+      "linewidth": 2,
+      "yaxes": [
+        {
+          "format": "req/s",
+          "label": null,
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "format": "req/s",
+          "label": null,
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "xaxis": {
+        "show": true
+      }
+    },
+    {
+      "type": "graph",
+      "title": "\ud83d\udcbe Uso de Mem\u00f3ria RAM",
+      "datasource": "prometheus",
+      "id": 3,
+      "gridPos": {
+        "x": 0,
+        "y": 8,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "process_resident_memory_bytes / 1024 / 1024",
+          "interval": "",
+          "legendFormat": "{{handler}}",
+          "refId": "A"
+        }
+      ],
+      "lines": true,
+      "linewidth": 2,
+      "yaxes": [
+        {
+          "format": "MB",
+          "label": null,
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "format": "MB",
+          "label": null,
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "xaxis": {
+        "show": true
+      }
+    },
+    {
+      "type": "graph",
+      "title": "\ud83d\udd01 CPU total do processo",
+      "datasource": "prometheus",
+      "id": 4,
+      "gridPos": {
+        "x": 12,
+        "y": 8,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "process_cpu_seconds_total",
+          "interval": "",
+          "legendFormat": "{{handler}}",
+          "refId": "A"
+        }
+      ],
+      "lines": true,
+      "linewidth": 2,
+      "yaxes": [
+        {
+          "format": "s",
+          "label": null,
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "format": "s",
+          "label": null,
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "xaxis": {
+        "show": true
+      }
+    },
+    {
+      "type": "graph",
+      "title": "\ud83d\udea6 Requisi\u00e7\u00f5es por status",
+      "datasource": "prometheus",
+      "id": 5,
+      "gridPos": {
+        "x": 0,
+        "y": 16,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "sum by (status) (rate(http_requests_total[1m]))",
+          "interval": "",
+          "legendFormat": "{{handler}}",
+          "refId": "A"
+        }
+      ],
+      "lines": true,
+      "linewidth": 2,
+      "yaxes": [
+        {
+          "format": "req/s",
+          "label": null,
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "format": "req/s",
+          "label": null,
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "xaxis": {
+        "show": true
+      }
+    }
+  ]
+}
