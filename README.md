@@ -9,6 +9,8 @@ Este repositório implementa um pipeline completo de previsão de preços de aç
 - [Métricas Prometheus](http://localhost:8000/metrics)
 - [Interface Prometheus](http://localhost:9090)
 - [Dashboard Grafana](http://localhost:3000)
+- [📂 README da API](./api/README.md)
+- [🧠 README do Treinamento (src)](./src/README.md)
 
 ## 📁 Estrutura do Projeto
 
