@@ -24,8 +24,6 @@ def download_and_prepare_data(ticker: str, start_date: str, end_date: str, lookb
     print(f"Baixando dados de {ticker} de {start_date} a {end_date}...")
     df = yf.download(ticker, start=start_date, end=end_date)
 
-    df = yf.download(ticker, start=start_date, end=end_date)
-
     # Salvar dados brutos
     raw_dir = save_dir + "raw"
     os.makedirs(raw_dir, exist_ok=True)

@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <title>Preditor de Ações com LSTM</title>
   <script>
+    window.onload = function () {
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById("data").value = today;
+    }
+
     async function prever() {
       const ticker = document.getElementById("ticker").value;
       const data = document.getElementById("data").value;
@@ -87,6 +92,7 @@
   <hr>
 
   <h3>Ou envie um arquivo CSV:</h3>
+  <h4>Obs.: O padrão do nome do arquivo deve ser TICKER_nome_arquivo.csv</h4>
   <input type="file" id="csvfile" accept=".csv">
   <br><br>
   <button onclick="enviarCSV()">Enviar CSV</button>
