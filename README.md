@@ -2,6 +2,12 @@
 
 Este repositório implementa um pipeline completo de previsão de preços de ações usando redes neurais LSTM, com deploy em uma API RESTful com FastAPI e monitoramento via Prometheus + Grafana.
 
+Os modelos foram treinados baseados em empresas que estão investindo em Intligência Artificial.
+As empresas sã Apple, Google (Alphabet), Meta e Microsoft.
+
+Detalhes da modelagem estão na pasta src/
+Detalhes da API estão na pasta api/
+
 ## 🔗 Acessos rápidos
 
 - [API FastAPI](http://localhost:8000/)
