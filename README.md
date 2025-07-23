@@ -6,6 +6,7 @@ Os modelos foram treinados baseados em empresas que estão investindo em Intlig�
 As empresas sã Apple, Google (Alphabet), Meta e Microsoft.
 
 Detalhes da modelagem estão na pasta src/
+
 Detalhes da API estão na pasta api/
 
 ## 🔗 Acessos rápidos
